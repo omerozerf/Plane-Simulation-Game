@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaneController : MonoBehaviour
@@ -8,10 +9,6 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private float velocitySpeed;
     [SerializeField] private float angularSpeed;
     [SerializeField] private Rigidbody body;
-
-
-
-    
     
     private void Update()
     {
@@ -51,5 +48,22 @@ public class PlaneController : MonoBehaviour
             body.angularVelocity *= 0;
         }
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Obstacle"))
+        {
+            Debug.Log("Game Over!");
+        }
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    { 
+        if (other.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("asdasd");
+        }
     }
 }
